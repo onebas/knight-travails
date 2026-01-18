@@ -23,8 +23,8 @@ function shortestPath(a, b){
 
         let neighbors = findNeighbors(vertex);
         for(let neighbor of neighbors){
-            if(!(visited.has(neighbor))){
-                visited.add(neighbor);
+            if(!(visited.has(neighbor.join()))){
+                visited.add(neighbor.join());
                 queue.push(neighbor);
                 paths.set(neighbor.join(), vertex.join());
             }
@@ -33,3 +33,4 @@ function shortestPath(a, b){
 }   
 
 
+shortestPath([0,0], [7,7]);
