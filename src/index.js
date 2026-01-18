@@ -1,4 +1,5 @@
 import { findNeighbors } from "./Neighbors.js";
+import { generatePath } from "./PathGenerator.js";
 
 function shortestPath(a, b){
     let queue = [];
@@ -12,10 +13,12 @@ function shortestPath(a, b){
 
     while(queue.length!=0){
         let vertex = queue.shift();
-
         if(vertex.join() == b.join()){
+            let path = generatePath(paths, b, a);
+            console.log(`You made it in ${path.length-1} moves`);
+            for(let vertex of path) console.log(vertex);
             break;
-            // functionality for creating path to be added in a different module
+            
         }
 
         let neighbors = findNeighbors(vertex);
@@ -23,11 +26,10 @@ function shortestPath(a, b){
             if(!(visited.has(neighbor))){
                 visited.add(neighbor);
                 queue.push(neighbor);
-                paths.set(neighbor, vertex);
+                paths.set(neighbor.join(), vertex.join());
             }
         }
     }
 }   
 
 
-shortestPath([3, 3], [4, 3]);
